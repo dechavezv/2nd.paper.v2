@@ -1,0 +1,2 @@
+(((short-eared_dog,Crab-eating_fox):0.693892,(Hoary_fox,(Pampas_fox,((Darwins_fox,SA_gray_fox):2.976287,(Culpeo_fox,Sechuran_fox):0.563955):0.138106):0.203724):2.111449):2.99047,((Bush_dog_16,(Bush_dog_315,(Bush_dog_313,Bush_dog_338):0.017134):0.11436):6.390011,(Maned_wolf_18,((Maned_wolf_404,Maned_wolf_388):0.015503,(Maned_wolf_370,Maned_wolf_383):0.096025):0.046347):5.71031):0.582922);
+

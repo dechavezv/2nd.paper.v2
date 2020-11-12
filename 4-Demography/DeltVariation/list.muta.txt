@@ -1,0 +1,3 @@
+synonymous_variant
+missense_variant
+LOF

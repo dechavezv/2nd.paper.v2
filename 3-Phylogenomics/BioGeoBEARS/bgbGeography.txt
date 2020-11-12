@@ -1,0 +1,18 @@
+17	3 (A B C)
+Culpeo_fox	111
+Bush_dog_16	001
+Bush_dog_313	001
+Bush_dog_315	001
+Bush_dog_338	001
+Crab-eating_fox	101
+Darwins_fox	100
+Hoary_fox	001
+Maned_wolf_18	001
+Maned_wolf_370	001
+Maned_wolf_383	001
+Maned_wolf_388	001
+Maned_wolf_404	001
+Pampas_fox	001
+SA_gray_fox	101
+Sechuran_fox	100
+short-eared_dog	001

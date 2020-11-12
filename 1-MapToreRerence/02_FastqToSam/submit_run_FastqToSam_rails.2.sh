@@ -1,0 +1,48 @@
+#! /bin/bash
+#$ -wd /u/home/d/dechavez/project-rwayne/rails.project
+#$ -l highp,h_rt=02:00:00,h_data=1G
+#$ -N subfq2sam
+#$ -o /u/home/d/dechavez/project-rwayne/rails.project/log/FastqToSam
+#$ -e /u/home/d/dechavez/project-rwayne/rails.project/log/FastqToSam
+#$ -m abe
+#$ -M dechavezv
+
+#highmem
+
+#usage [dir] [read_1] [read_2] [outfile] [RG] [sample] [library] [flowcell] [seq center]
+
+#QSUB=/u/systems/UGE8.0.1vm/bin/lx-amd64/qsub
+QSUB=/u/systems/UGE8.6.4/bin/lx-amd64/qsub
+SCRIPT=/u/home/d/dechavez/project-rwayne/2nd.paper/1-MapToreRerence/02_FastqToSam/run_FastqToSam_rails.2.sh
+
+DIR=/u/home/d/dechavez/project-rwayne/rails.project
+
+
+#sleep 1h
+#sleep 5m
+
+## ${QSUB} ${SCRIPT} ${DIR} GR5_S9_L007_R1_001.fastq.gz GR5_S9_L007_R2_001.fastq.gz GR5_S9_HWKG5BBXX_FastqToSam.bam GR5_1a GR5 Lib1 HWKG5BBXX UCLA
+## ${QSUB} ${SCRIPT} ${DIR} LS05_S80_L001_R1_001.fastq.gz LS05_S80_L001_R2_001.fastq.gz LS05.FastqToSam.bam LS051a LS05 Lib1 H5THTDSXY UCB_QB3
+## ${QSUB} ${SCRIPT} ${DIR} LS09_S81_L001_R1_001.fastq.gz LS09_S81_L001_R2_001.fastq.gz LS09.FastqToSam.bam LS091a LS09 Lib1 H5THTDSXY UCB_QB3
+## ${QSUB} ${SCRIPT} ${DIR} LS21_S82_L001_R1_001.fastq.gz LS21_S82_L001_R2_001.fastq.gz LS21.FastqToSam.bam LS221a LS21 Lib1 H5THTDSXY UCB_QB3
+## ${QSUB} ${SCRIPT} ${DIR} LS29_S83_L001_R1_001.fastq.gz LS29_S83_L001_R2_001.fastq.gz LS29.FastqToSam.bam LS291a LS29 Lib1 H5THTDSXY UCB_QB3
+## ${QSUB} ${SCRIPT} ${DIR} LS34_S84_L001_R1_001.fastq.gz LS34_S84_L001_R2_001.fastq.gz LS34.FastqToSam.bam LS341a LS34 Lib1 H5THTDSXY UCB_QB3
+## ${QSUB} ${SCRIPT} ${DIR} LS35_S85_L001_R1_001.fastq.gz LS35_S85_L001_R2_001.fastq.gz LS35.FastqToSam.bam LS351a LS35 Lib1 H5THTDSXY UCB_QB3
+## ${QSUB} ${SCRIPT} ${DIR} LS49_S86_L001_R1_001.fastq.gz LS49_S86_L001_R2_001.fastq.gz LS49.FastqToSam.bam LS491a LS49 Lib1 H5THTDSXY UCB_QB3
+## ${QSUB} ${SCRIPT} ${DIR} LS57_S87_L001_R1_001.fastq.gz LS57_S87_L001_R2_001.fastq.gz LS57.FastqToSam.bam LS571a LS57 Lib1 H5THTDSXY UCB_QB3
+
+${QSUB} ${SCRIPT} ${DIR} SH6393_SA71256_S11_L002_R1_001.fastq.gz SH6393_SA71256_S11_L002_R2_001.fastq.gz LS33.FastqToSam.bam SA71256 LS33 SH6393 HJNN3DSXY_HiSeqX Fulgent
+${QSUB} ${SCRIPT} ${DIR} SH6393_SA71257_S12_L002_R1_001.fastq.gz SH6393_SA71257_S12_L002_R2_001.fastq.gz LS36.FastqToSam.bam SA71257 LS36 SH6393 HJNN3DSXY_HiSeqX Fulgent
+${QSUB} ${SCRIPT} ${DIR} SH6394_SA71258_S13_L003_R1_001.fastq.gz SH6394_SA71258_S13_L003_R2_001.fastq.gz LS37.FastqToSam.bam SA71258 LS37 SH6394 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6394_SA71259_S14_L003_R1_001.fastq.gz SH6394_SA71259_S14_L003_R2_001.fastq.gz LS38.FastqToSam.bam SA71259 LS38 SH6394 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6394_SA71260_S15_L003_R1_001.fastq.gz SH6394_SA71260_S15_L003_R2_001.fastq.gz LS39.FastqToSam.bam SA71260 LS39 SH6394 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6394_SA71261_S16_L003_R1_001.fastq.gz SH6394_SA71261_S16_L003_R2_001.fastq.gz LS40.FastqToSam.bam SA71261 LS40 SH6394 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6394_SA71262_S17_L003_R1_001.fastq.gz SH6394_SA71262_S17_L003_R2_001.fastq.gz LS43.FastqToSam.bam SA71262 LS43 SH6394 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6394_SA71263_S18_L003_R1_001.fastq.gz SH6394_SA71263_S18_L003_R2_001.fastq.gz LS44.FastqToSam.bam SA71263 LS44 SH6394 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6395_SA71264_S19_L004_R1_001.fastq.gz SH6395_SA71264_S19_L004_R2_001.fastq.gz LS50.FastqToSam.bam SA71264 LS50 SH6395 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6395_SA71265_S20_L004_R1_001.fastq.gz SH6395_SA71265_S20_L004_R2_001.fastq.gz LS51.FastqToSam.bam SA71265 LS51 SH6395 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6395_SA71266_S21_L004_R1_001.fastq.gz SH6395_SA71266_S21_L004_R2_001.fastq.gz LS52.FastqToSam.bam SA71266 LS52 SH6395 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6395_SA71267_S22_L004_R1_001.fastq.gz SH6395_SA71267_S22_L004_R2_001.fastq.gz LS55.FastqToSam.bam SA71267 LS55 SH6395 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6395_SA71268_S23_L004_R1_001.fastq.gz SH6395_SA71268_S23_L004_R2_001.fastq.gz LS56.FastqToSam.bam SA71268 LS56 SH6395 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6395_SA71269_S24_L004_R1_001.fastq.gz SH6395_SA71269_S24_L004_R2_001.fastq.gz LS58.FastqToSam.bam SA71269 LS58 SH6395 HJNN3DSXY_HiSeqX Fulgent
+## ${QSUB} ${SCRIPT} ${DIR} SH6395_SA71270_S25_L004_R1_001.fastq.gz SH6395_SA71270_S25_L004_R2_001.fastq.gz LS60.FastqToSam.bam SA71270 LS60 SH6395 HJNN3DSXY_HiSeqX Fulgent

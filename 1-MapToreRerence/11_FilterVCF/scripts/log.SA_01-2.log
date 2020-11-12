@@ -1,0 +1,3 @@
+Your job-array 3939758.1-38:1 ("Filter.VCF.custom.python") has been submitted
+[dechavez@login4 scripts]$ qsub Mask_Filter_SA.sh 02
+Your job-array 3939759.1-38:1 ("Filter.VCF.custom.python") has been submitted
