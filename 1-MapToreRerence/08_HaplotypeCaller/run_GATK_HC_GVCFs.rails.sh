@@ -1,9 +1,9 @@
 #!/bin/bash
-#$ -wd /u/scratch/d/dechavez/rails.project/bams/Daniel.2020/bam
-#$ -l highmem,h_rt=190:00:00,h_data=16G,highp,h_vmem=50G
+#$ -wd /u/home/d/dechavez/project-rwayne/rails.project
+#$ -l h_rt=190:00:00,h_data=16G,highp,h_vmem=50G
 #$ -N HC_rail
-#$ -o /u/scratch/d/dechavez/rails.project/bams/Daniel.2020/bam/log/gvcf/log/reports
-#$ -e /u/scratch/d/dechavez/rails.project/bams/Daniel.2020/bam/log/gvcf/log/reports
+#$ -o /u/scratch/d/dechavez/readsRailsFulgent/log/
+#$ -e /u/scratch/d/dechavez/readsRailsFulgent/log/
 #$ -m abe
 #$ -M dechavezv
 
@@ -13,11 +13,11 @@ module load java
 module load samtools
 source activate gatk-intel
                                      
-export DIREC=/u/scratch/d/dechavez/readsRailsFulgent
+export DIREC=/u/home/d/dechavez/project-rwayne/rails.project
 export OUT=/u/home/d/dechavez/project-rwayne/rails.project
 export BAM=${1}
-export Reference=/u/home/d/dechavez/project-rwayne/rails.project/reference.genomes/InaccesibleRail/InaccesibleRail.fa
-export temp=/u/scratch/d/dechavez/readsRailsFulgent/temp
+export Reference=/u/home/d/dechavez/project-rwayne/rails.project/reference.genomes/InaccesibleRail/chr_and_superScafolds/InaccesibleRail.chr.fa
+export temp=/u/home/d/dechavez/project-rwayne/rails.project/temp
 
 cd ${DIREC}
 
