@@ -25,22 +25,22 @@ for i in {13..22};
 
 	do (
 	echo "#! /bin/bash"
-	echo "#$ -wd /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020"
+	echo "#$ -wd /u/home/d/dechavez/project-rwayne/rails.project"
 	echo "#$ -l h_rt=30:00:00,h_data=8G,highp,h_vmem=40G"
-	echo "#$ -t 01-8:1"
+	echo "#$ -t 32-60:1"
 	echo "#$ -N HC_rail_${i}"
-	echo "#$ -o /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020/log/reports"
-	echo "#$ -e /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020/log/reports"
+	echo "#$ -o /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
+	echo "#$ -e /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
 	echo "#$ -m abe"
 	echo "#$ -M dechavezv"
 	echo
 	echo "source /u/local/Modules/default/init/modules.sh"
 	echo "module load java"
 	echo
-	echo "cd /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020"
+	echo "cd /u/home/d/dechavez/project-rwayne/rails.project"
 	echo
-	echo "export BAM=\$(ls \$(printf "%02d" "\$SGE_TASK_ID")_LS_Aligned.AtlChr.MarkDup_Filtered.bam)"
-	echo "export ID=\${BAM%_Aligned.AtlChr.MarkDup_Filtered.bam}"
+	echo "export BAM=\$(ls LS\$(printf "%02d" "\$SGE_TASK_ID").FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam )"
+	echo "export ID=\${BAM%.FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam }"
 	echo
 	echo "java -jar -Xmx8g /u/local/apps/gatk/3.7/GenomeAnalysisTK.jar \\"
 	echo "-T HaplotypeCaller \\"
@@ -50,7 +50,7 @@ for i in {13..22};
 	echo "-out_mode EMIT_ALL_SITES \\"
 	echo "-L PseudoChr_${i} \\"
 	echo "-I \${BAM} \\"
-	echo "-o /u/scratch/d/dechavez/rails.project/gvcf/\${ID}_chr${i}.g.vcf.gz"
+	echo "-o /u/home/d/dechavez/project-rwayne/rails.project/gvcf/\${ID}_chr${i}.g.vcf.gz"
 	
 	) > "run_GATK_HC_rail_chr13_22_highp.sh"
 

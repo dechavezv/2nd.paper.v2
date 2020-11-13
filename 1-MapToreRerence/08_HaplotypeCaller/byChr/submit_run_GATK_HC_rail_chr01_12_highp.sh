@@ -21,26 +21,26 @@
 # I'm not totally sure about the wisdom of using the --dontUseSoftClippedBases option, 
 # but I know I used it last time, so I kept it here for consistency with the previous fox study.
 
-for i in {1..3}; 
+for i in {1..12}; 
 
 	do (
 	echo "#! /bin/bash"
-	echo "#$ -wd /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020"
+	echo "#$ -wd /u/home/d/dechavez/project-rwayne/rails.project"
 	echo "#$ -l highmem_forced,h_rt=122:00:00,h_data=15G,highp,h_vmem=90G"
-	echo "#$ -t 01-8:1"
+	echo "#$ -t 32-60:1"
 	echo "#$ -N HC_rail_${i}"
-	echo "#$ -o /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020/log/reports"
-	echo "#$ -e /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020/log/reports"
+	echo "#$ -o /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
+	echo "#$ -e /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
 	echo "#$ -m abe"
 	echo "#$ -M dechavezv"
 	echo
 	echo "source /u/local/Modules/default/init/modules.sh"
 	echo "module load java"
 	echo
-	echo "cd /u/home/d/dechavez/project-rwayne/rails.project/reads/Daniel.data.2020"
+	echo "cd /u/home/d/dechavez/project-rwayne/rails.project"
 	echo
-	echo "export BAM=\$(ls \$(printf "%02d" "\$SGE_TASK_ID")_LS_Aligned.AtlChr.MarkDup_Filtered.bam)"
-	echo "export ID=\${BAM%_Aligned.AtlChr.MarkDup_Filtered.bam}"
+	echo "export BAM=\$(ls LS\$(printf "%02d" "\$SGE_TASK_ID").FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam)"
+	echo "export ID=\${BAM%.FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam}"
 	echo
 	echo "java -jar -Xmx15g /u/local/apps/gatk/3.7/GenomeAnalysisTK.jar \\"
 	echo "-T HaplotypeCaller \\"
@@ -50,7 +50,7 @@ for i in {1..3};
 	echo "-out_mode EMIT_ALL_SITES \\"
 	echo "-L PseudoChr_${i} \\"
 	echo "-I \${BAM} \\"
-	echo "-o /u/scratch/d/dechavez/rails.project/gvcf/\${ID}_chr${i}.g.vcf.gz"
+	echo "-o /u/home/d/dechavez/project-rwayne/rails.project/gvcf/\${ID}_chr${i}.g.vcf.gz"
 	
 	) > "run_GATK_HC_rail_chr1_12_highp.sh"
 
