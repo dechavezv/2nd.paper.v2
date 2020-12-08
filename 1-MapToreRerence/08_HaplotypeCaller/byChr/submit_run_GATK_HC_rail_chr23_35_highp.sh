@@ -25,9 +25,9 @@ for i in {23..35};
 
 	do (
 	echo "#! /bin/bash"
-	echo "#$ -wd /u/home/d/dechavez/project-rwayne/rails.project"
+	echo "#$ -wd /u/scratch/d/dechavez/readsRailsFulgent"
 	echo "#$ -l h_rt=24:00:00,h_data=8G,h_vmem=40G,arch=intel*"
-	echo "#$ -t 32-60:1"
+	echo "#$ -t 10-10:1"
 	echo "#$ -N HC_rail_${i}"
 	echo "#$ -o /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
 	echo "#$ -e /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
@@ -37,7 +37,7 @@ for i in {23..35};
 	echo "source /u/local/Modules/default/init/modules.sh"
 	echo "module load java"
 	echo
-	echo "cd /u/home/d/dechavez/project-rwayne/rails.project"
+	echo "cd /u/scratch/d/dechavez/readsRailsFulgent"
 	echo
 	echo "export BAM=\$(ls LS\$(printf "%02d" "\$SGE_TASK_ID").FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam)"
 	echo "export ID=\${BAM%.FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam}"

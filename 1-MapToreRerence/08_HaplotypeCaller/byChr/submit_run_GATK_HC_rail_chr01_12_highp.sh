@@ -21,13 +21,13 @@
 # I'm not totally sure about the wisdom of using the --dontUseSoftClippedBases option, 
 # but I know I used it last time, so I kept it here for consistency with the previous fox study.
 
-for i in {1..12}; 
+for i in {1..3}; 
 
 	do (
 	echo "#! /bin/bash"
-	echo "#$ -wd /u/home/d/dechavez/project-rwayne/rails.project"
-	echo "#$ -l highmem_forced,h_rt=122:00:00,h_data=15G,highp,h_vmem=90G"
-	echo "#$ -t 32-60:1"
+	echo "#$ -wd /u/scratch/d/dechavez/readsRailsFulgent"
+	echo "#$ -l highmem_forced=TRUE,h_rt=280:00:00,h_data=15G,highp,h_vmem=90G"
+	echo "#$ -t 2-31:1"
 	echo "#$ -N HC_rail_${i}"
 	echo "#$ -o /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
 	echo "#$ -e /u/scratch/d/dechavez/readsRailsFulgent/log/reports"
@@ -37,7 +37,7 @@ for i in {1..12};
 	echo "source /u/local/Modules/default/init/modules.sh"
 	echo "module load java"
 	echo
-	echo "cd /u/home/d/dechavez/project-rwayne/rails.project"
+	echo "cd /u/scratch/d/dechavez/readsRailsFulgent"
 	echo
 	echo "export BAM=\$(ls LS\$(printf "%02d" "\$SGE_TASK_ID").FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam)"
 	echo "export ID=\${BAM%.FastqToSam.bam_Aligned.AtlChr.MarkDup_Filtered.bam}"
