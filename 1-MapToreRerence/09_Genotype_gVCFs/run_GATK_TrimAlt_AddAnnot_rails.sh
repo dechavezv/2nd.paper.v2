@@ -1,12 +1,12 @@
 #! /bin/bash
-#$ -wd /u/scratch/d/dechavez/rails.project/VCF
-#$ -l highmem,highp,h_vmem=64G,h_rt=24:00:00,h_data=20G,arch=intel*
+#$ -wd /u/scratch/d/dechavez/readsRailsFulgent/JointVCF
+#$ -l highp,h_vmem=74G,h_rt=280:00:00,h_data=10G,arch=intel*
 #$ -N trim_annot
-#$ -o /u/scratch/d/dechavez/rails.project/VCF/log/
-#$ -e /u/scratch/d/dechavez/rails.project/VCF/log/
+#$ -o /u/scratch/d/dechavez/readsRailsFulgent/JointVCF/log/
+#$ -e /u/scratch/d/dechavez/readsRailsFulgent/JointVCF/log/
 #$ -m abe
 #$ -M dechavezv
-#$ -t 3-3:1
+#$ -t 3-34:1
 
 #highmem,highp
 
@@ -16,9 +16,9 @@ module load java
 GATK=/u/local/apps/gatk/3.7/GenomeAnalysisTK.jar
 REFERENCE=/u/home/d/dechavez/project-rwayne/rails.project/reference.genomes/InaccesibleRail/chr_and_superScafolds/InaccesibleRail.chr.fa
 
-cd /u/scratch/d/dechavez/rails.project/VCF
+cd /u/scratch/d/dechavez/readsRailsFulgent/JointVCF
 
-java -jar -Xmx20g ${GATK} \
+java -jar -Xmx10g ${GATK} \
 -T SelectVariants \
 -R ${REFERENCE} \
 -trimAlternates \
