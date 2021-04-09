@@ -4,8 +4,8 @@
 #$ -l h_rt=30:00:00,h_data=4G,highp,h_vmem=80G
 #$ -N msmc
 #$ -pe shared 11
-#$ -o /u/scratch/d/dechavez/SA.VCF/log/
-#$ -e /u/scratch/d/dechavez/SA.VCF/log/
+#$ -o /u/scratch/d/dechavez/L.griseus.Psomangen/log/
+#$ -e /u/scratch/d/dechavez/L.griseus.Psomangen/log/
 #$ -m abe
 #$ -M dechavezv
 
@@ -20,10 +20,10 @@ rundate=`date +%Y%m%d` # msmc rundate
 
 PREFIX=$1
 
-date=20200731 #Input creation date
+date=20022021 #Input creation date
 
-INPUTDIR=/u/scratch/d/dechavez/SA.VCF/Filtered/${date}/msmcAnalysis/inputFiles
-OUTDIR=/u/scratch/d/dechavez/SA.VCF/Filtered/${date}/msmcAnalysis/output_${rundate}
+INPUTDIR=/u/scratch/d/dechavez/L.griseus.Psomangen/${date}/msmcAnalysis/inputFiles
+OUTDIR=/u/scratch/d/dechavez/L.griseus.Psomangen/${date}/msmcAnalysis/output_${rundate}
 mkdir -p $OUTDIR
 
 ${msmc} -t 11 -o $OUTDIR/rails.msmc.${PREFIX}.out $INPUTDIR/chunk_${PREFIX}_*_postMultiHetSep.txt

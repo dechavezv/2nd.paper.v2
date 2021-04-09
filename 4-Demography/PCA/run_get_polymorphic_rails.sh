@@ -1,32 +1,34 @@
 #! /bin/bash
-#$ -wd /u/scratch/d/dechavez/rails.project/VCF/Indv/Scaf
-#$ -l h_rt=24:00:00,h_data=1G,h_vmem=5G
+#$ -wd /u/scratch/d/dechavez/rails.project/MaskedRpeaWM.March.2021
+#$ -l h_rt=24:00:00,h_data=1G,h_vmem=6G,arch=intel*
 #$ -N OnlySNPs
-#$ -o /u/scratch/d/dechavez/rails.project/VCF/Indv/Scaf/log/
-#$ -e /u/scratch/d/dechavez/rails.project/VCF/Indv/Scaf/log/
+#$ -o /u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/Chr_Joint/2021.31Genomes/log/
+#$ -e /u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/Chr_Joint/2021.31Genomes/log/
 #$ -m abe
 #$ -M dechavezv
-#$ -t 8-8:1
+#$ -t 1-35:1
 
-i=$(printf "%02d" "$SGE_TASK_ID")
+i=$(printf "$SGE_TASK_ID")
 
 source /u/local/Modules/default/init/modules.sh
 module load python
 
-cd /u/scratch/d/dechavez/rails.project/VCF/Indv/Scaf
+cd /u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/Chr_Joint/2021.31Genomes
 
-zcat Reheader_${i}_FastqToSam.bam_Aligned.MarkDup_Filtered_Masked.vcf.gz \
-grep -v "^#" | grep -v "FAIL" | grep -v "WARN" | grep -vE '\./\.' | /u/home/d/dechavez/tabix-0.2.6/bgzip -c \
-> onlyPass/Reheader_${i}_FastqToSam.bam_Aligned.MarkDup_Filter_passingSNPs.vcf.gz
+## zcat LS_joint_chr${i}_TrimAlt_Annot_Mask_Filter.vcf.gz \
+## grep -v "^#" | grep -v "FAIL" | grep -v "WARN" | \
+## grep -v "AF=0.0;" | grep -v "AF=0.00;" | grep -v "AF=1.0" | grep -vE '\./\.' | \
+## /u/home/d/dechavez/tabix-0.2.6/bgzip -c \
+## > onlyPass/LS_joint_chr${i}_TrimAlt_Annot_Mask_Filter_passingSNPs.vcf.gz
 
-vcf=Reheader_${i}_FastqToSam.bam_Aligned.MarkDup_Filter_passingSNPs.vcf.gz
+vcf=LS_joint_chr${i}_TrimAlt_Annot_Mask_Filter_passingSNPs.vcf.gz
 
 cd onlyPass
 
 #/u/home/d/dechavez/tabix-0.2.6/bgzip -c ${vcf} > ${vcf}.gz
 /u/home/d/dechavez/tabix-0.2.6/tabix -p vcf ${vcf}
 
-#rm ${PREFIX}_chr${i}_Annot_Mask_Filter_passingSNPs.vcf
+#rm ${vcf}
 
 
 # polymorphic
@@ -36,4 +38,3 @@ cd onlyPass
 #Good Quality
 # grep -v "^#" | grep -v "FAIL" | grep -v "WARN" | grep -vE '\./\.' \
 # > /u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/msmc/LS_joint_chr$(printf $SGE_TASK_ID)_Annot_Mask_Filter_passingSNPs.vcf
-

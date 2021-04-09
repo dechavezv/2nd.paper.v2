@@ -4,8 +4,8 @@
 args=commandArgs(TRUE)
 
 # Genotype count datac
-gtfiles=list.files(path="/u/scratch/d/dechavez/SA.VCF/Filtered/20200530/HetPerInd/", pattern="PerInd.txt")
-gtfiles=paste("/u/scratch/d/dechavez/SA.VCF/Filtered/20200530/HetPerInd/", gtfiles[1:38], sep="")
+gtfiles=list.files(path="/u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris/", pattern="PerInd.txt")
+gtfiles=paste("/u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris/", gtfiles[1:38], sep="")
 gts=data.frame(read.table(gtfiles[1], header=T, sep='\t'))
 for (i in 2:length(gtfiles)){
 	gts=gts+data.frame(read.table(gtfiles[i], header=T, sep='\t'))
@@ -24,7 +24,7 @@ autohet=hets/calls
 
 # ROH data
 
-rohdata=read.table("SAcanids.catted.hom", header=T)
+rohdata=read.table("SA.2021.gris.canids.catted.hom", header=T)
 
 shorts=rohdata[rohdata$POS2-rohdata$POS1>=100000 & rohdata$POS2-rohdata$POS1<1000000,]
 meds=rohdata[rohdata$POS2-rohdata$POS1>=1000000 & rohdata$POS2-rohdata$POS1<10000000,]
@@ -66,7 +66,7 @@ for (i in 1:length(samplename)){
 #	"AMI","DGR","DFU","DSE")
 
 samps=c("AMI","Cb17082018","Cbr370","Cbr383","Cbr388","Cbr404","Cth",
-	"DFU","DGR","DSE","Lculp","Lgy","Lvet","SV16082018","Sve313","Sve315","Sve338")
+	"DFU","DGR","DSE","Lculp", "Lgri.006", "Lgri.015" , "Lgy","Lvet","SV16082018","Sve313","Sve315","Sve338")
 
 
 # Orde has to be the same as in hete.txt files
@@ -75,7 +75,7 @@ samps=c("AMI","Cb17082018","Cbr370","Cbr383","Cbr388","Cbr404","Cth",
 #	"SA Gray fox","Andean fox","Crab-eat fox","Pampas fox","Hoary fox")
 
 mylabels=c("short-Eared-dog","MW Capt.","MW 370","MW 383","MW 388","MW 404",
-	"Crab-eat fox","Darwin fox","SA Gray fox","Sechuran fox","Culpeo fox","Pampas fox",
+	"Crab-eat fox","Darwin's fox Ch","Darwin's fox Na","Sechuran fox","Culpeo fox", "SA grayfox V", "SA grayfox P", "Pampas fox",
 	"Hoary fox","BD Capt","BD 313","BD 315","BD 338")
 
 
@@ -96,6 +96,8 @@ mygroups[which(samps %in% "AMI")]=7
 mygroups[which(samps %in% "DGR")]=8
 mygroups[which(samps %in% "DFU")]=9
 mygroups[which(samps %in% "DSE")]=10
+mygroups[which(samps %in% "Lgri.006")]=11
+mygroups[which(samps %in% "Lgri.015")]=12
 
 mydf=data.frame(samplename, nocalls, calls, homRs, homAs, hets, autohet, shortnums, mednums, longnums, shortsums, medsums, longsums)
 
@@ -106,6 +108,8 @@ mydf2=mydf2[order(mydf2$autohet, decreasing=F),]
 #####
 
 # Plot autosomal het and ROH length sums
+
+write.csv(mydf2,"ROH.Sum.csv", row.names = FALSE)
 
 pdf(paste("ROH_v_AutosomalHet_20200530_", args[1], ".pdf", sep=""), width=3.28, height=4.92, pointsize=8)
 
@@ -141,7 +145,7 @@ myred="green4"
 myblue="firebrick4"
 mygrey="#bababa"
 myblack="black"
-bgcols=c(mygrey,mygrey,mygrey,mygrey,myblue,myred,myblack,mygrey,myblack,myblack)
+bgcols=c(mygrey,mygrey,mygrey,mygrey,mygrey,mygrey,myblue,myred,myblack,mygrey,myblack,myblack)
 
 #Original Colors JAR
 #myred="#ef8a62"
@@ -155,7 +159,7 @@ myred2="green4"
 myblue2="firebrick4"
 mygrey2="#bababa"
 myblack2="black"
-linecols=c(mygrey2,mygrey2,mygrey2,mygrey2,myblue2,myred2,myblack2,mygrey2,myblack2,myblack2)
+linecols=c(mygrey2,mygrey2,mygrey2,mygrey2,myblue2,myred2,myblack2,mygrey2,myblack2,myblack2,myblack2,myblack2)
 
 #Original Colors JAR
 #myred="#ef8a62"
@@ -164,6 +168,7 @@ linecols=c(mygrey2,mygrey2,mygrey2,mygrey2,myblue2,myred2,myblack2,mygrey2,mybla
 
 
 pdf(paste("ROH_nums_20200530_", args[1], ".pdf", sep=""), width=7.4, height=2.75, pointsize=12)
+
 par(mfrow=c(1,3))
 par(mar=c(7,4,3,.1))
 
@@ -177,21 +182,22 @@ mygroups[which(samps %in% "AMI")]=7
 mygroups[which(samps %in% "DGR")]=8
 mygroups[which(samps %in% "DFU")]=9
 mygroups[which(samps %in% "DSE")]=10
-
+mygroups[which(samps %in% "Lgri.006")]=11
+mygroups[which(samps %in% "Lgri.015")]=12
 
 ymax=1.2*max(mydf2$shortnums)
-plot(mydf2$mygroups,mydf2$shortnums, bty="n", ylim=c(0,ymax), axes=F, ylab="Total Number of ROH", main="Short ROH\n[100kb, 1Mb)", xlab="", cex=1.5, pch=21, col=linecols[mydf2$mygroups], bg=bgcols[mydf2$mygroups], font.main=1, cex.main=1, xlim=c(1,10))
+plot(mydf2$mygroups,mydf2$shortnums, bty="n", ylim=c(0,ymax), axes=F, ylab="Total Number of ROH", main="Short ROH\n[100kb, 1Mb)", xlab="", cex=1.5, pch=21, col=linecols[mydf2$mygroups], bg=bgcols[mydf2$mygroups], font.main=1, cex.main=1, xlim=c(1,12))
 axis(side=2, line=.5)
-axis(side=1, labels=c("Crab-eating fox","Hoary fox","Pampas fox", "Andean fox", "Maned wolf", "Bush dog","short-Eared-dog","SA Gray fox","Darwin fox", "Sechuran fox"), at=seq(1,10), las=2)
+axis(side=1, labels=c("Crab-eating fox","Hoary fox","Pampas fox", "Andean fox", "Maned wolf", "Bush dog","short-Eared-dog","Darwin fox N","Darwin fox Ch", "Sechuran fox","SA grayfox V", "SA grayfox P"), at=seq(1,12), las=2)
 
 ymax=1.2*max(mydf2$mednums)
-plot(mydf2$mygroups,mydf2$mednums, bty="n", ylim=c(0,ymax), axes=F, ylab="", main="Medium ROH\n[1Mb, 10Mb)", xlab="", cex=1.5, pch=21, col=linecols[mydf2$mygroups], bg=bgcols[mydf2$mygroups], font.main=1, cex.main=1, xlim=c(1,10))
+plot(mydf2$mygroups,mydf2$mednums, bty="n", ylim=c(0,ymax), axes=F, ylab="", main="Medium ROH\n[1Mb, 10Mb)", xlab="", cex=1.5, pch=21, col=linecols[mydf2$mygroups], bg=bgcols[mydf2$mygroups], font.main=1, cex.main=1, xlim=c(1,12))
 axis(side=2, line=.5)
-axis(side=1, labels=c("Crab-eating fox","Hoary fox","Pampas fox", "Andean fox", "Maned wolf", "Bush dog", "short-Eared-dog","SA Gray fox","Darwin fox", "Sechuran fox"), at=seq(1,10), las=2)
+axis(side=1, labels=c("Crab-eating fox","Hoary fox","Pampas fox", "Andean fox", "Maned wolf", "Bush dog", "short-Eared-dog","Darwin fox N","Darwin fox Ch", "Sechuran fox","SA grayfox V", "SA grayfox P"), at=seq(1,12), las=2)
 
 ymax=1.2*max(mydf2$longnums)
-plot(mydf2$mygroups,mydf2$longnums, bty="n", ylim=c(0,ymax), axes=F, ylab="", main="Long ROH\n[10Mb,100Mb)", xlab="", cex=1.5, pch=21, col=linecols[mydf2$mygroups], bg=bgcols[mydf2$mygroups], font.main=1, cex.main=1, xlim=c(1,10))
+plot(mydf2$mygroups,mydf2$longnums, bty="n", ylim=c(0,ymax), axes=F, ylab="", main="Long ROH\n[10Mb,100Mb)", xlab="", cex=1.5, pch=21, col=linecols[mydf2$mygroups], bg=bgcols[mydf2$mygroups], font.main=1, cex.main=1, xlim=c(1,12))
 axis(side=2, line=.5)
-axis(side=1, labels=c("Crab-eating fox","Hoary fox","Pampas fox", "Andean fox", "Maned wolf", "Bush dog" , "short-Eared-dog","SA Gray fox","Darwin fox", "Sechuran fox"), at=seq(1,10), las=2)
+axis(side=1, labels=c("Crab-eating fox","Hoary fox","Pampas fox", "Andean fox", "Maned wolf", "Bush dog" , "short-Eared-dog","Darwin fox N","Darwin fox Ch", "Sechuran fox","SA grayfox V", "SA grayfox P"), at=seq(1,12), las=2)
 
 dev.off()

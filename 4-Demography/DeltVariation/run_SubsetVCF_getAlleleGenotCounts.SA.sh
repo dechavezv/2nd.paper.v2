@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #$ -l h_data=5G,h_vmem=10G,h_rt=24:00:00,arch=intel*
-#$ -wd /u/scratch/d/dechavez/SA.VCF
+#$ -wd /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris
 #$ -N DeletVar_Step1
-#$ -o /u/scratch/d/dechavez/SA.VCF/log/
-#$ -e /u/scratch/d/dechavez/SA.VCF/log/
+#$ -o /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris/log
+#$ -e /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris/log
 #$ -m abe
 #$ -M dechavezv
-#$ -t 37-38:1
+#$ -t 01-38:1
 
 echo '***************** Input Variables ********************************' 
 source /u/local/Modules/default/init/modules.sh
@@ -18,12 +18,12 @@ IDX=$(printf %02d ${SGE_TASK_ID})
 
 
 SCRIPT=/u/home/d/dechavez/project-rwayne/2nd.paper/4-Demography/DeltVariation/getAlleleGenotCounts.py 
-LOG=/u/scratch/d/dechavez/SA.VCF/countSitesPerIndividual_${date}.log
-OUTDIR=/u/scratch/d/dechavez/SA.VCF
-VCFDIR=/u/scratch/d/dechavez/SA.VCF
+LOG=/u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris/countSitesPerIndividual_${date}.log
+OUTDIR=/u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris
+VCFDIR=/u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris
 Mutt=$1 # list of mutations
 
-VCF=SA_chr${IDX}_TrimAlt_Annot_Mask_Filter_VEP.vcf.gz
+VCF=SA.2021.gris.chr${IDX}_TrimAlt_Annot_Mask_Filter_VEP.vcf.gz
 
 #if [ ${Mutt} == 'damaging' ]; then
 #    Mutt="frameshift_variant\|splice_acceptor_variant\|splice_donor_variant\|start_lost\|stop_gained\|stop_lost\|deleterious\|inframe_insertion\|inframe_deletion"
@@ -43,7 +43,7 @@ echo '*****************	Done Inputing Variables	********************************
 echo '***************** Subset VCF for mutations Type ********************************'
 cd ${VCFDIR}
 zcat ${VCF} | head -n 1000 | grep '#' > ${VCF%.vcf.gz}.${Mutt}.vcf
-zcat ${VCF} | grep 'protein_coding' | grep ${Mutts} >> ${VCF%.vcf.gz}.${Mutt}.vcf
+zcat ${VCF} | grep 'protein_coding' | grep ${Mutts2} >> ${VCF%.vcf.gz}.${Mutt}.vcf
 
 #compress
 /u/home/d/dechavez/tabix-0.2.6/bgzip ${VCF%.vcf.gz}.${Mutt}.vcf

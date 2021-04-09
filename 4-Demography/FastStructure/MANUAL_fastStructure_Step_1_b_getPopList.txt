@@ -1,0 +1,20 @@
+## MANUAL STEP : don't run in the shell : get pop assignment file: (need list of populations in same order as list of samples) [manual] 
+
+calldate=20200729 # date you called genotypes 
+
+# and then manually make list of population assignments in order (is there a better way?)
+indir=/u/scratch/d/dechavez/rails.project/SNPRelate20200729/plinkFormat # eventually going to be filtered SNP vcf (no monomorphic sites)
+infilePREFIX=LS_joint_allchr_Annot_Mask_Filter_passingSNPs.NoInvar.vcf
+# old prefix snp_5_passingAllFilters_postMerge_raw_variants # the prefix of the .bed file
+outdir=
+backupdate=`date +%Y%m%d` # date for the backup (date you make your population assignments)
+# first get the second column of the .fam file
+awk '{print $2}' $indir/${infilePREFIX}.fam > $indir/${infilePREFIX}.samples
+
+# !!!!! manually assign populations >>> and rename outfile to manual.popAssignment!!!!!
+# *** MANUAL **** # nano $indir/${infilePREFIX}.samples -----> manually assign sample populations.
+# make a back up:
+cp $indir/${infilePREFIX}.manual.popAssignment $indir/${infilePREFIX}.manual.popAssignment.${backupdate}.bk # saving a backup just in case so you don't lose manual work
+
+awk '{print $2}' $indir/${infilePREFIX}.manual.popAssignment > $indir/${infilePREFIX}.pops
+# check if pop file exists, if it does, use it. Otherwise do not

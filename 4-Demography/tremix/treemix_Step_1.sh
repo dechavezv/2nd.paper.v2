@@ -14,13 +14,13 @@ module load treemix
 ### can also do with snp9a and see the difference
 
 header=LS_joint_allchr_Annot_Mask_Filter_passingSNPs.NoInvar.vcf
-cd /u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/20200517_filtered/treemixFormat
+cd /u/scratch/d/dechavez/rails.project/SNPRelate20200729/treemixFormat
 
 ######### With BAJA (no relatives) #############
 k=500
 marker="allRails"
 infile=${header}.${marker}.frq.strat.treemixFormat.gz
-root='StCruz' # root is both
+root='St.Curz' # root is both
 for m in {0..10}
 do
 outdir="root.${root}.mig.${m}.k.${k}.global.${marker}.treemix"

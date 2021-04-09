@@ -5,7 +5,8 @@
 ## It will make 3 versions of treemix input: 
 source /u/local/Modules/default/init/modules.sh
 module load treemix
-module load plink/1.07
+#module load plink/1.07
+module load plink/1.90b3.45
 
 # converter script:
 # wget https://bitbucket.org/nygcresearch/treemix/downloads/plink2treemix.py
@@ -21,8 +22,8 @@ module load plink/1.07
 ############## get plink format files from fastStructure_Step_1_vcf2plinkBed.20181119.sh in the FASTSTRUCTURE analysis section ##########
 
 scriptdir=/u/home/d/dechavez/project-rwayne/2nd.paper/4-Demography/tremix
-genotypeDate=20200517
-vcfdir=/u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/${genotypeDate}_filtered
+genotypeDate=20200729
+vcfdir=/u/scratch/d/dechavez/rails.project/SNPRelate${genotypeDate}
 plinkFileDir=$vcfdir/plinkFormat
 treeFileDir=$vcfdir/treemixFormat
 mkdir -p $treeFileDir
@@ -62,19 +63,19 @@ echo " YOU MUST MANUALLY EXCLUDE THE RELATIVES HERE" ####
 # manually edit the file to set individuals you want to exclude to "0"
 clusters=$plinkFileDir/$header.population.clusters.all.rails # 3 columns: 0 sampleID popID
 marker="allRails"
-plink --bfile $plinkFileDir/$header \
+plink --bfile ${plinkFileDir}/${header} \
 --freq \
 --missing \
 --within $clusters \
 --noweb \
---chr 1-36 \
---out $plinkFileDir/$header.${marker} \
+--allow-extra-chr \
+--out ${plinkFileDir}/${header}.${marker} \
 --nonfounders \
 --keep-allele-order \
 --filter $plinkFileDir/$header.exclList.allIndsIncluded 1
 ## --chr-set 36 no-x no-y no-xy no-mt \
 ### --allow-extra-chr \
-
+# --chr 1-35 \
 gzip -f $plinkFileDir/${header}.${marker}.frq.strat
 
 python $scriptdir/plink2treemix.py $plinkFileDir/${header}.${marker}.frq.strat.gz $treeFileDir/${header}.${marker}.frq.strat.treemixFormat.gz

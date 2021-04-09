@@ -108,5 +108,3 @@ VCF.close()
 output.close()
 
 exit()
-
-

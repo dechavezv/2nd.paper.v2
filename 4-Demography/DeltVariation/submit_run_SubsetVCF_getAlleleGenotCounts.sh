@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #$ -l h_data=1G,h_vmem=10G,h_rt=01:00:00
-#$ -wd /u/scratch/d/dechavez/rails.project/VCF/Indv/Scaf
+#$ -wd /u/scratch/d/dechavez/rails.project/Delet
 #$ -N subDeletVar_Step1
-#$ -o /u/scratch/d/dechavez/rails.project/VCF/Indv/Scaf/log/
-#$ -e /u/scratch/d/dechavez/rails.project/VCF/Indv/Scaf/log/
+#$ -o /u/scratch/d/dechavez/rails.project/Delet/log/
+#$ -e /u/scratch/d/dechavez/rails.project/Delet/log/
 #$ -m abe
 #$ -M dechavezv
 

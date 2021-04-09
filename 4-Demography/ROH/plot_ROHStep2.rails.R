@@ -4,8 +4,8 @@
 args=commandArgs(TRUE)
 
 # Genotype count data
-gtfiles=list.files(path="/u/scratch/d/dechavez/rails.project/VCF/Joint/", pattern="PerInd.txt")
-gtfiles=paste("/u/scratch/d/dechavez/rails.project/VCF/Joint/", gtfiles[1:34], sep="")
+gtfiles=list.files(path="/u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/Chr_Joint/2021.31Genomes/", pattern="PerInd.txt")
+gtfiles=paste("/u/home/d/dechavez/project-rwayne/rails.project/VCF/DanielData/Chr_Joint/2021.31Genomes/", gtfiles[1:35], sep="")
 gts=data.frame(read.table(gtfiles[1], header=T, sep='\t'))
 for (i in 2:length(gtfiles)){
 	gts=gts+data.frame(read.table(gtfiles[i], header=T, sep='\t'))
@@ -60,16 +60,24 @@ for (i in 1:length(samplename)){
 
 # Make data table
 
-samps=c("LS05", "LS09", "LS21", "LS29", "LS34", "LS35", "LS49", "LS57")
+samps=c("LS02","LS03","LS05","LS06","LS08","LS09","LS10","LS12","LS13","LS14","LS15",
+	"LS21","LS22","LS25","LS26","LS27","LS28","LS29","LS31","LS32","LS33","LS34",
+	"LS35","LS36","LS37","LS38","LS39","LS40","LS43","LS44","LS49","LS50","LS51",
+	"LS52","LS55","LS56","LS57","LS58","LS60")
 
 #Orde has to be the same as in hete.txt files
-mylabels=c("LS05.StCruz", "LS09.StCruz", "LS21.Isabela", "LS29.Isabela", 
-	"LS34.Pinta", "LS35.Pinta", "LS49.Santiago", "LS57.Santiago")
+mylabels=c("LS02.St.Curz","LS03.St.Curz","LS05.St.Curz","LS06.St.Curz","LS08.St.Curz",
+	"LS09.St.Curz","LS10.St.Curz","LS12.St.Curz","LS13.St.Curz","LS14.St.Curz","LS15.St.Curz",
+	"LS21.Isabela","LS22.Isabela","LS25.Isabela","LS26.Isabela","LS27.Isabela","LS28.Isabela",
+	"LS29.Isabela","LS31.Isabela","LS32.Pinta","LS33.Pinta","LS34.Pinta","LS35.Pinta","LS36.Pinta",
+	"LS37.Pinta","LS38.Pinta","LS39.Pinta","LS40.Pinta","LS43.Santiago","LS44.Santiago","LS49.Santiago",
+	"LS50.Santiago","LS51.Santiago","LS52.Santiago","LS55.Santiago","LS56.Santiago","LS57.Santiago",
+	"LS58.Santiago","LS60.Santiago")
 
-StCruz=c("LS05", "LS09")
-Isabela=c("LS21", "LS29")
-Pinta=c("LS34", "LS35")
-Santiago=c("LS49", "LS57")
+StCruz=c("LS02","LS03","LS05","LS06","LS08","LS09","LS10","LS12","LS13","LS14","LS15")
+Isabela=c("LS21","LS22","LS25","LS26","LS27","LS28","LS29","LS31")
+Pinta=c("LS32","LS33","LS34","LS35","LS36","LS37","LS38","LS39","LS40")
+Santiago=c("LS43","LS44","LS49","LS50","LS51","LS52","LS55","LS56","LS57","LS58","LS60")
 
 myfonts=rep(3, length(samps))
 myfonts[which(samps %in% c(Pinta))]=2
@@ -139,8 +147,6 @@ linecols=c(mygrey2,mygrey2,myred2,mygrey2)
 #myred="#ef8a62"
 #myblue="#67a9cf"
 #mygrey="#bababa"
-
-
 
 pdf(paste("ROH_nums_20200530_", args[1], "rails.pdf", sep=""), width=6.83, height=2.65, pointsize=12)
 par(mfrow=c(1,3))

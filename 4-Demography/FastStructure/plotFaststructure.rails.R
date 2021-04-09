@@ -3,13 +3,13 @@ require(reshape2)
 require(RColorBrewer)
 colorPal=RColorBrewer::brewer.pal(n=12,name = "Paired")
 colors=list(CA=colorPal[1],BAJ=colorPal[1],AK=colorPal[2],AL=colorPal[3],COM=colorPal[4],KUR=colorPal[5])
-calldate="20200517"
-data.dir="/u/home/d/dechavez/project-rwayne/rails.project/FASTSTRUCTURE/20200517_filtered/"
-plot.dir="/u/home/d/dechavez/project-rwayne/rails.project/FASTSTRUCTURE/20200517_filtered/plots/"
+calldate="20200729"
+data.dir="/u/home/d/dechavez/project-rwayne/rails.project/FASTSTRUCTURE/20200729/"
+plot.dir="/u/home/d/dechavez/project-rwayne/rails.project/FASTSTRUCTURE/20200729/plots/"
 k=2
-inputQ=read.table(paste(data.dir,"LS_joint_allchr_Annot_Mask_Filter_passingSNPs.vcf.faststructure_output.",k,".meanQ",sep=""))
+inputQ=read.table(paste(data.dir,"LS_joint_allchr_Annot_Mask_Filter_passingSNPs.NoInvar.vcf.faststructure_output.",k,".meanQ",sep=""))
 
-popAssignment=read.table(paste(data.dir,"LS_joint_allchr_Annot_Mask_Filter_passingSNPs.vcf.manual.popAssignment",sep=""))
+popAssignment=read.table(paste(data.dir,"LS_joint_allchr_Annot_Mask_Filter_passingSNPs.NoInvar.vcf.manual.popAssignment",sep=""))
 colnames(popAssignment) <- c("sample","population")
 dim(popAssignment)
 dim(inputQ)

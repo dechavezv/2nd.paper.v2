@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #$ -l h_data=1G,h_vmem=10G,h_rt=01:00:00
-#$ -wd /u/scratch/d/dechavez/SA.VCF
+#$ -wd /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris
 #$ -N SAsubDeletVar_Step1
-#$ -o /u/scratch/d/dechavez/SA.VCF/log/
-#$ -e /u/scratch/d/dechavez/SA.VCF/log/
+#$ -o /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris/log
+#$ -e /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris/log
 #$ -m abe
 #$ -M dechavezv
 

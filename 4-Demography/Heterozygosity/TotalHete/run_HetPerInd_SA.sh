@@ -1,6 +1,6 @@
 #! /bin/bash
 
-#$ -wd /u/home/d/dechavez/project-rwayne/SA.VCF/Combined
+#$ -wd /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris
 #$ -l highp,h_rt=24:00:00,h_data=1G,arch=intel*
 #$ -N SAtotHet
 #$ -o /u/home/d/dechavez/project-rwayne/SA.VCF/Combined/log/
@@ -16,13 +16,13 @@ module load python
 
 SCRIPTDIR=/u/home/d/dechavez/project-rwayne/2nd.paper/4-Demography/Heterozygosity/TotalHete
 
-Direc=/u/home/d/dechavez/project-rwayne/SA.VCF/Combined
+Direc=/u/home/d/dechavez/project-rwayne/SA.VCF/Combined/2021.gris
 
 cd ${Direc}
 
 i=$(printf %02d $SGE_TASK_ID)
 
-python ${SCRIPTDIR}/HetPerInd_SA.py SA_chr${i}_TrimAlt_Annot_Mask_Filter.vcf.gz ${i}
+python ${SCRIPTDIR}/HetPerInd_SA.py SA.2021.gris.chr${i}_TrimAlt_Annot_Mask_Filter.vcf.gz ${i}
 
 #for i in {01..8}; do (python ${SCRIPTDIR}/HetPerInd_SA.py Reheader_${i}_FastqToSam.bam_Aligned.MarkDup_Filtered_Masked.vcf.gz);done
 
@@ -30,5 +30,4 @@ python ${SCRIPTDIR}/HetPerInd_SA.py SA_chr${i}_TrimAlt_Annot_Mask_Filter.vcf.gz 
 #python ${SCRIPTDIR}/HetPerInd_SA.py $(ls ${line}_chr$(printf %02d $SGE_TASK_ID)*vcf.gz) ${SGE_TASK_ID};done
 
 ## python ${SCRIPTDIR}/HetPerInd_SA.py $(ls LS01_chr$(printf %02d $SGE_TASK_ID)*.vcf.gz) ${SGE_TASK_ID}                               
-python ${SCRIPTDIR}/HetPerInd_SA.py Reheader_$(printf %02d $SGE_TASK_ID)_FastqToSam.bam_Aligned.MarkDup_Filtered_Masked.vcf.gz
-
+#python ${SCRIPTDIR}/HetPerInd_SA.py Reheader_$(printf %02d $SGE_TASK_ID)_FastqToSam.bam_Aligned.MarkDup_Filtered_Masked.vcf.gz
