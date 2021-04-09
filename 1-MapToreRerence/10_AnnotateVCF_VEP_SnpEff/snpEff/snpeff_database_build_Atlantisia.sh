@@ -1,4 +1,5 @@
 #! /bin/bash
+
 #$ -wd /u/home/d/dechavez/project-rwayne/2nd.paper/1-MapToreRerence/10_AnnotateVCF_VEP_SnpEff/snpEff
 #$ -l h_rt=48:00:00,h_data=10G,h_vmem=50G,highp
 #$ -N snpEff.rails
@@ -19,11 +20,11 @@ Database=Atro.0055
 Snpeffdir=/u/home/d/dechavez/project-rwayne/snpEff
 # Snpeffdir=/u/home/m/meixilin/snpEff/snpEff
 HOMEDIR=/u/home/d/dechavez/project-rwayne
-ATLDIR=${HOMEDIR}/rails.project/reference.genomes/InaccesibleRail
+ATLDIR=${HOMEDIR}/rails.project/reference.genomes/InaccesibleRail/chr_and_superScafolds
 
 # chooses the reference genome and gtf file to construct the SnpEff database
-REFERENCE=${ATLDIR}/InaccesibleRail.fa
-GTF=${ATLDIR}/OUT-0055.homolog.gff
+REFERENCE=${ATLDIR}/InaccesibleRail.chr.fa
+GTF=${ATLDIR}/Chr.OUT-0055.homolog.gff
 
 # the config files already modified manually 
 # vi snpEff.config 
